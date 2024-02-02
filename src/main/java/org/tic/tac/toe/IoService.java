@@ -1,15 +1,10 @@
 package org.tic.tac.toe;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class IoService {
 
-
-    public IoService() {
-    }
-
-    public Integer getInputInteger(String message) {
+    public static Integer getInputInteger(String message) {
         Integer integer = null;
         Boolean retryMethode = false;
         do {
@@ -23,13 +18,36 @@ public class IoService {
             }
         } while (retryMethode);
         if (integer == null) {
-            System.out.println("Thank you for using this application");
-            System.exit(0);
+            messageAndExitApps("Thank you for using this application");
         }
         return integer;
     }
 
-    public Boolean isWantToRetry() {
+    public static Integer getInputInteger(String message, Integer maxximum) {
+        Boolean retryMethode = false;
+        Integer integer=null;
+        do {
+             integer = getInputInteger(message);
+            retryMethode = integer < 1 || integer > maxximum;
+            if (retryMethode) {
+                System.out.println("Please Input Number value in range 1 to " + maxximum);
+            }
+        } while (retryMethode);
+        return integer;
+    }
+
+    public static String getInputString(String message) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(message);
+        return scanner.nextLine();
+    }
+
+    public static void messageAndExitApps(String message) {
+        System.out.println(message);
+        System.exit(0);
+    }
+
+    public static Boolean isWantToRetry() {
         Boolean isYesOrNo = false;
         char c;
         do {
